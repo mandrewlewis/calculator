@@ -54,17 +54,25 @@ header {
     border: 2px solid black;
     border-radius: 10px;
     background-color: rgb(230, 230, 230);
+    font-size: 20px;
+    box-shadow: 0 1px 1px 0 black;
 }
 
 .clear {
     margin-left: calc(60px + 20px);
     height: 40px;
+    font-size: 18px;
 }
 
 .backspace {
     height: 40px;
     width: calc((60px + 10px) * 2);
-    /* flex-grow: 2; */
+    font-size: 18px;
 }
 
+.btn:active {
+    background-color: rgb(215, 215, 215);
+    box-shadow: 0 0 0 0;
+    transform: translateY(1px);
+}
 
