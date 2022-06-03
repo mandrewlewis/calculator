@@ -56,3 +56,15 @@ header {
     background-color: rgb(230, 230, 230);
 }
 
+.clear {
+    margin-left: calc(60px + 20px);
+    height: 40px;
+}
+
+.backspace {
+    height: 40px;
+    width: calc((60px + 10px) * 2);
+    /* flex-grow: 2; */
+}
+
+
