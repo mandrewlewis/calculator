@@ -1,3 +1,8 @@
+const display = document.querySelector('.display');
+let displayArray = [];
+
+
+// Operative functions
 function add(x, y) {
     return x + y;
 }
@@ -10,7 +15,6 @@ function multiply(x, y) {
 function divide(x, y) {
     return x / y;
 }
-
 function operate(operator, x, y) {
     switch(operator) {
         case '+':
@@ -29,3 +33,12 @@ function operate(operator, x, y) {
             alert('Critical error!');
     }
 }
+
+
+// Display function
+function displayOnCalc(char) {
+    displayArray.push(char);
+    display.textContent = displayArray.join('');
+}
+
+
