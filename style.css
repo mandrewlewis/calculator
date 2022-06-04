@@ -4,7 +4,6 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     touch-action: manipulation;
-    color: black;
 }
 
 header {
@@ -58,6 +57,7 @@ header {
     background-color: rgb(230, 230, 230);
     font-size: 20px;
     color: black;
+    -webkit-text-fill-color: black;
     box-shadow: 0 1px 1px 0 black;
 }
 
