@@ -59,6 +59,14 @@ header {
     box-shadow: 0 1px 1px 0 black;
 }
 
+.op {
+    background-color: rgb(180, 170, 199);
+}
+
+.fn {
+    background-color: rgb(217, 224, 153);
+}
+
 .clear {
     margin-left: calc(60px + 20px);
     height: 40px;
@@ -72,8 +80,19 @@ header {
 }
 
 .btn:active {
-    background-color: rgb(215, 215, 215);
     box-shadow: 0 0 0 0;
     transform: translateY(1px);
+}
+
+.num:active {
+    background-color: rgb(215, 215, 215);
+}
+
+.op:active {
+    background-color: rgb(165, 155, 184);
+}
+
+.fn:active {
+    background-color: rgb(202, 209, 138);
 }
 
