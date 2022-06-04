@@ -5,6 +5,7 @@ let rightOp = [];
 let operator = '';
 let result = 0;
 let decimalFlag = false;
+let equalFlag = false;
 
 // Operative functions
 function add(x, y) {
@@ -69,7 +70,13 @@ function displayOnCalc(char) {
             } 
             else {
                 //another + or - should be treated as = with result stored in leftOp
+                if (equalFlag) {
+                    displayArray = [];
+                    equalFlag = false;
+                }
+                else {
                 leftOp = operate(operator,leftOp,+displayArray.join(''));
+                }
                 displayArray = [];
                 decimalFlag = false;
                 operator = char;
@@ -79,6 +86,7 @@ function displayOnCalc(char) {
             displayArray.pop();
             if (leftOp.length === 0) break;
             if (displayArray.length === 0) break;
+            if (equalFlag) break;
 
             result = operate(operator,leftOp,+displayArray.join(''));
             if (result.toString().includes('.')) { 
@@ -87,11 +95,13 @@ function displayOnCalc(char) {
             } else { decimalFlag = false; }
             displayArray = result.toString().split('');
             leftOp = result;
+            equalFlag = true;
             break;
         case 'CL':
             displayArray = [];
             leftOp = [];
             decimalFlag = false;
+            equalFlag = false;
             break;
         case 'BACKSPACE':
             displayArray.pop();
