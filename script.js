@@ -108,7 +108,8 @@ function displayOnCalc(char) {
         displayArray = 'ERROR'.split('');
     }
     //Display array as string in DOM or display '0' if string is empty or last num entered if operator
-    if (char === '+' || char === '-' || char === '×' || char === '÷' || char === '=') {
+    let opList = '+-×÷=';
+    if (opList.includes(char)) {
         if (displayArray != ['-'] && displayArray.length > 0) {
             display.textContent = leftOp;
             display.textContent = displayArray.join('');
@@ -128,3 +129,20 @@ calcButtons.forEach(btn => {
         displayOnCalc(btn.textContent);
     });
 });
+
+// Add keyboard handler
+document.addEventListener('keyup', e => {
+    let acceptedKeys = '1234567890.=+-*/cEnterBackspace';
+    let name = e.key;
+    let code = e.code;
+    console.log({name});
+    console.log({code});
+    if (acceptedKeys.includes(name)) {
+        if (name === '*') name = '×';
+        if (name === '/') name = '÷';
+        if (name === 'Enter') name = '=';
+        if (name === 'Backspace') name = 'BACKSPACE';
+        if (name === 'c') name = 'CL';
+        displayOnCalc(name);
+    }
+})
