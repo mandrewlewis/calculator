@@ -9,16 +9,16 @@ let equalFlag = false;
 
 // Operative functions
 function add(x, y) {
-    return x + y;
+    return +x + +y;
 }
 function subtract(x, y) {
-    return x - y;
+    return +x - +y;
 }
 function multiply(x, y) {
-    return x * y;
+    return +x * +y;
 }
 function divide(x, y) {
-    return x / y;
+    return +x / +y;
 }
 function operate(operator, x, y) {
     switch(operator) {
@@ -102,7 +102,7 @@ function displayOnCalc(char) {
             result = operate(operator,leftOp,+displayArray.join(''));
             // Handles decimal rounding and limits to one decimal in str
             if (result.toString().includes('.')) { 
-                result = result.toFixed(1);
+                result = result.toFixed(2);
                 decimalFlag = true;
             } else { decimalFlag = false; }
             // Add result to display arr
@@ -119,14 +119,17 @@ function displayOnCalc(char) {
             break;
         case 'BACKSPACE':
             displayArray.pop(); // Pop operator symbol from display
+            if (equalFlag) break;
             displayArray.pop(); // Pop last char from display
             break;
         case '.':
+            if (equalFlag) break;
             // Adds decimal, limit to 1 in arr
             if (decimalFlag) displayArray.pop();
             decimalFlag = true;
             break;
         default:
+            if (equalFlag) displayArray.pop();
     }
     
 
