@@ -57,8 +57,9 @@ header {
     background-color: rgb(230, 230, 230);
     font-size: 20px;
     color: black;
-    -webkit-text-fill-color: black;
     box-shadow: 0 1px 1px 0 black;
+    /* This overrides the color property on Safari iOS */
+    -webkit-text-fill-color: black;
 }
 
 .op {

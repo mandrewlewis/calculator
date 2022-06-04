@@ -32,6 +32,7 @@ function operate(operator, x, y) {
             return multiply(x,y);
             break;
         case '÷':
+            // Catch divide by zero
             if (y === 0) {
                 alert('Are you TRYING to break my calculator?\nYou must be so proud of yourself.');
                 return 'ERROR';
@@ -39,12 +40,15 @@ function operate(operator, x, y) {
             return divide(x,y);
             break;
         default:
+            // This should never get returned
             return alert('Critical error!');
     }
 }
 
 
 // Display function
+// Calls operation functions to make the calculation
+// Then displays result in DOM
 function displayOnCalc(char) {
     displayArray.push(char);
 
@@ -53,27 +57,31 @@ function displayOnCalc(char) {
         case '-':
         case '×':
         case '÷':
-            displayArray.pop();
+            displayArray.pop(); // Pop operator symbol from display
+
+            // Creates negative number if '-' is pressed before any numbers
             if (displayArray.length === 0){
-                //Creates negative number if '-' is pressed before any numbers
                 if(char === '-') { 
                     displayArray.push('-');
                     break;
                 }
                 break;
             }
+            // When '+-*/' is pressed, store what is currently displayed in leftOp
             else if (leftOp.length === 0) {
                 leftOp = +displayArray.join('');
                 displayArray = [];
                 decimalFlag = false;
                 operator = char;
             } 
+            // This handles chaining operations e.g., '2 * 5 + 6 / 2 = 8'
             else {
-                //another + or - should be treated as = with result stored in leftOp
+                // Catches error if user presses '+-*/' immediately after '='
                 if (equalFlag) {
                     displayArray = [];
                     equalFlag = false;
                 }
+                // Makes calculation and stores result in leftOp
                 else {
                 leftOp = operate(operator,leftOp,+displayArray.join(''));
                 }
@@ -83,31 +91,38 @@ function displayOnCalc(char) {
             }
             break;
         case '=':
-            displayArray.pop();
-            if (leftOp.length === 0) break;
-            if (displayArray.length === 0) break;
-            if (equalFlag) break;
+            // This is the main case for making calculations
+            
+            displayArray.pop(); // Pop operator symbol from display
+            if (leftOp.length === 0) break; //catches '=' with no operator provided
+            if (displayArray.length === 0) break; //catches '=' with nothing to operate
+            if (equalFlag) break; //catches multiple '='
 
+            // Calculate and store result
             result = operate(operator,leftOp,+displayArray.join(''));
+            // Handles decimal rounding and limits to one decimal in str
             if (result.toString().includes('.')) { 
                 result = result.toFixed(1);
                 decimalFlag = true;
             } else { decimalFlag = false; }
+            // Add result to display arr
             displayArray = result.toString().split('');
             leftOp = result;
             equalFlag = true;
             break;
         case 'CL':
+            // Reset all vars and flags
             displayArray = [];
             leftOp = [];
             decimalFlag = false;
             equalFlag = false;
             break;
         case 'BACKSPACE':
-            displayArray.pop();
-            displayArray.pop();
+            displayArray.pop(); // Pop operator symbol from display
+            displayArray.pop(); // Pop last char from display
             break;
         case '.':
+            // Adds decimal, limit to 1 in arr
             if (decimalFlag) displayArray.pop();
             decimalFlag = true;
             break;
@@ -119,16 +134,18 @@ function displayOnCalc(char) {
     if (displayArray.length > 12 || displayArray.includes('E')) {
         displayArray = 'ERROR'.split('');
     }
-    //Display array as string in DOM or display '0' if string is empty or last num entered if operator
+    // If chaining or equating, keep displayArray emppty but still display calculated result
     let opList = '+-×÷=';
     if (opList.includes(char)) {
         if (displayArray !== ['-'] && leftOp.toString().length > 0 ) {
             display.textContent = leftOp.toString();
         }
     }
+    //Display '0' if displayArray empty
     else if (displayArray.length === 0) {
         display.textContent = '0';
     }
+    //Display arr in DOM
     else { display.textContent = displayArray.join(''); }
 }
 
