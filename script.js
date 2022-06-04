@@ -137,7 +137,12 @@ function displayOnCalc(char) {
     // If chaining or equating, keep displayArray emppty but still display calculated result
     let opList = '+-×÷=';
     if (opList.includes(char)) {
-        if (displayArray !== ['-'] && leftOp.toString().length > 0 ) {
+        // Another overflow error catch
+        if (leftOp.toString().length > 12) {
+            displayArray = 'ERROR'.split('');
+            display.textContent = displayArray.join('');
+        }
+        else if (displayArray !== ['-'] && leftOp.toString().length > 0 ) {
             display.textContent = leftOp.toString();
         }
     }
