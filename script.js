@@ -55,7 +55,7 @@ function displayOnCalc(char) {
             displayArray.pop();
             if (displayArray.length === 0){
                 //Creates negative number if '-' is pressed before any numbers
-                if(char === '-' && displayArray.length === 0) { 
+                if(char === '-') { 
                     displayArray.push('-');
                     break;
                 }
@@ -81,10 +81,12 @@ function displayOnCalc(char) {
             if (displayArray.length === 0) break;
 
             result = operate(operator,leftOp,+displayArray.join(''));
-            if (result.toString().includes('.')) { result = result.toFixed(1); }
+            if (result.toString().includes('.')) { 
+                result = result.toFixed(1);
+                decimalFlag = true;
+            } else { decimalFlag = false; }
             displayArray = result.toString().split('');
-            leftOp = [];
-            decimalFlag = false;
+            leftOp = result;
             break;
         case 'CL':
             displayArray = [];
@@ -110,10 +112,10 @@ function displayOnCalc(char) {
     //Display array as string in DOM or display '0' if string is empty or last num entered if operator
     let opList = '+-×÷=';
     if (opList.includes(char)) {
-        if (displayArray != ['-'] && displayArray.length > 0) {
-            display.textContent = leftOp;
-            display.textContent = displayArray.join('');
+        if (displayArray !== ['-'] && leftOp.toString().length > 0 ) {
+            display.textContent = leftOp.toString();
         }
+        else { display.textContent = '0'; }
     }
     else if (displayArray.length === 0) {
         display.textContent = '0';
