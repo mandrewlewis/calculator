@@ -115,7 +115,6 @@ function displayOnCalc(char) {
         if (displayArray !== ['-'] && leftOp.toString().length > 0 ) {
             display.textContent = leftOp.toString();
         }
-        else { display.textContent = '0'; }
     }
     else if (displayArray.length === 0) {
         display.textContent = '0';
