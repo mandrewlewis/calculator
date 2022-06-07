@@ -1,3 +1,3 @@
 # calculator
 
-Functioning calculator using HTML, CSS, and Javascript. Project assignment from The Odin Project.
+Functioning calculator built from scratch using HTML, CSS, and Javascript. Project assignment from The Odin Project.
